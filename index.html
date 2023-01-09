@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+	:root {
+		font-family: sans-serif;
+	}
+	@media all and (orientation: portrait) {
+		:root {
+			font-size: 2vh !important;
+		}
+		#me {
+			display:block;
+			height: 10em;
+			width: 10em;
+			margin:auto !important;
+		}
+	}
+	@media all and (orientation: landscape) {
+		h1 {
+			padding-left: 2em;
+		}
+		#me {
+			height: 8em;
+			width: 8em;
+			float: left;
+		}
+	}
+	#top-wrapper {
+		min-height: calc(100vh - 5em);
+	}
+	header p {
+		color: white;
+		font-size: 1.3em;
+	}
+	body {
+		margin: 0;
+		padding: 0;
+		background-color: #011936;
+	}
+	#me {
+		border: 1em solid #EFC460;
+		border-radius: 50%;
+		margin-right: 2em;
+	}
+	header {
+		max-width: 50em;
+		overflow: auto;
+		margin: auto;
+		padding: .5em 1em .5em;
+		background-color: #246EB9;
+		border-radius: 0 0 1em 1em;
+	}
+	h1 {
+		vertical-align: middle;
+		color: white;
+	}
+	#centre-column {
+		background-color: #EFC460;
+		max-width: 60ch;
+		padding: 1em;
+		margin: auto;
+	}
+	p:first-child {
+		margin: 0 0 0;
+	}
+	p {
+		margin: 1em 0 0;
+	}
+	#projects-flexbox {
+		display: flex;
+		flex-wrap: wrap;
+		margin: auto;
+		margin-bottom: 1em;
+		max-width: calc(100vw - 20px);
+		align-items: start;
+		justify-content: center;
+	}
+	figure {
+		margin: 0;
+	}
+	figure > .thumbnail {
+		display: block;
+		width: 15em;
+		border-radius: 1em;
+	}
+	figure figcaption {
+		display: block;
+		margin-top: 0.5em;
+		text-align: center;
+		font-size: 1.4em;
+	}
+	.figure-wrapper {
+		width: 15em;
+		overflow: hidden;
+		border: 0.4em solid #246EB9;
+		background-color: #EFC460;
+		margin: 1em 1em 0;
+		padding: 1em;
+		transition: height 100ms;
+		height: auto;
+		border-radius: 1em;
+	}
+	.figure-wrapper.video-figure-wrapper {
+		width: 20em;
+	}
+	.figure-wrapper:hover {
+		border: 0.4em solid white;
+	}
+	footer {
+		max-width: 50em;
+		height: 5em;
+		margin-left: calc(max((100vw - 50em)/2,0px));
+		width: 100%;
+		display: flex;
+		background-color: #246EB9;
+		justify-content: center;
+		border-radius: 1em 1em 0 0;
+	}
+	.contact {
+		background-color: #EFC460;
+		border-radius: 1em;
+		margin: 1em;
+		padding: 1em;
+	}
+	a {
+		color: #246EB9
+	}
+	footer a {
+		color: #011936;
+	}
+</style>
+<script>
+	document.addEventListener('DOMContentLoaded',
+		()=>{ console.log(document.getElementsByTagName('video')); Array.from(document.getElementsByTagName('video')).forEach(video => {
+			video.autoplay= false;
+			const pp= video.parentElement.parentElement;
+			pp.addEventListener('mouseover', ()=>{ video.play(); });
+			pp.addEventListener('mouseout', ()=>{ video.pause(); });
+			video.addEventListener('load', ()=>{
+				console.log("onload called");
+				video.pause();
+			});
+		}); }
+	);
+</script>
+</head>
+<body>
+<div id=top-wrapper>
+	<header>
+		<img id=me src="me.png"/><h1>Hi, I&#39;m David Jacewicz!</h1><p>I&#39;m a third-year student at the University of Waterloo, pursuing a degree in computer science.</p><p>Check out my projects:</p>
+	</header>
+	<section id=projects-flexbox>
+		<div class=figure-wrapper><figure>
+			<img class=thumbnail src=project-thumbnails/lagtrain.png>
+			<figcaption>Terminal Video Player</figcaption>
+			<div class=details>Plays any video on a terminal by converting frames to grayscale in realtime using LibAV&#39;s C API. <a href="https://github.com/diagonalisability/terminal-video-player"><strong>Check&nbsp;it&nbsp;out!</strong></a></div>
+		</figure></div>
+		<div class="figure-wrapper video-figure-wrapper"><figure>
+			<video autoplay loop muted class=thumbnail style="width:20em">
+				<source src="project-thumbnails/3d-multiplayer-lobby.mp4" type="video/mp4">
+			</video>
+			<figcaption>3D Multiplayer Lobby</figcaption>
+			<div class=details>A C++ client and server. Clients connect to the server and share their positions so that they can see each other move around. Uses TCP sockets for networking, Linux Epoll for asynchronous I/O, and Vulkan for rendering. <a href="https://github.com/diagonalisability/3d-multiplayer-lobby"><strong>Check&nbsp;it&nbsp;out!</strong></a></div>
+		</figure></div>
+		<div class=figure-wrapper><figure>
+			<img class=thumbnail src=project-thumbnails/torchat.jpg>
+			<figcaption>Tor Chat</figcaption>
+			<div class=details>A chat app which enables two peers to communicate by sending messages and files through Tor onion services. <a href="https://github.com/diagonalisability/p2p-tor-chat"><strong>Check&nbsp;it&nbsp;out!</strong></a></div>
+		</figure></div>
+		<div class=figure-wrapper><figure>
+			<img class=thumbnail src=project-thumbnails/lwjgl-maze-game.png>
+			<figcaption>Maze Game</figcaption>
+			<div class=details>A 3D puzzle game from my grade 12 CS final project. Uses LWJGL, a lightweight wrapper over OpenGL, for rendering. <a href="https://github.com/diagonalisability/lwjgl-maze-game"><strong>Check&nbsp;it&nbsp;out!</strong></a></div>
+		</figure></div>
+	</section>
+</div>
+<footer>
+	<a href="https://github.com/diagonalisability" class=contact>Github</a>
+	<a href="mailto:david.jacewicz@protonmail.com" class=contact>Email</a>
+</footer>
+</body>
+</html>
